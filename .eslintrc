@@ -21,6 +21,7 @@
 		"linebreak-style": ["error", "unix"],
 		"react-hooks/rules-of-hooks": "error",
 		"react-hooks/exhaustive-deps": "warn",
-		"@typescript-eslint/no-empty-function": "off"
+		"@typescript-eslint/no-empty-function": "off",
+		"react/prop-types": "off"
 	}
 }
