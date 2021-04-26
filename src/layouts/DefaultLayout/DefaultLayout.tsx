@@ -52,11 +52,11 @@ const DefaultLayout: React.FC<Props> = props => {
 							<div className={classes.externalLinks}>
 								{map(externalLinks, obj => (
 									<Tooltip key={obj.id} title={obj.tooltip} placement="bottom">
-										<>
+										<div>
 											<Link to={obj.url} target="_blank" rel="noreferrer">
 												<IconButton>{obj.icon}</IconButton>
 											</Link>
-										</>
+										</div>
 									</Tooltip>
 								))}
 							</div>

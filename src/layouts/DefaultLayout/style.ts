@@ -35,10 +35,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		}
 	},
 	externalLinks: {
-		marginLeft: theme.spacing(2),
-		'& .MuiLink-root': {
-			paddingBottom: theme.spacing(1)
-		}
+		marginLeft: theme.spacing(2)
 	},
 	content: {
 		display: 'flex',
@@ -53,14 +50,14 @@ export const useStyles = makeStyles((theme: Theme) => ({
 	mainContent: {
 		flexGrow: 1,
 		width: 1, // important to not overflow flex container
-		overflowY: "auto",
-		padding: theme.spacing(4),
+		overflowY: 'auto',
+		padding: theme.spacing(4)
 	},
 	children: {
 		height: 1,
-		"&:after": {
+		'&:after': {
 			content: "''",
-			display: "block",
+			display: 'block',
 			height: theme.spacing(4)
 		}
 	}

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { find, isEmpty, isNil } from 'lodash';
 import { formatDistanceToNow, fromUnixTime } from 'date-fns';
-import { Typography, ButtonBase, Button } from '@material-ui/core';
+import { Box, Typography, ButtonBase, Button } from '@material-ui/core';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 
 import { RootState } from 'src/store/store';
@@ -24,6 +24,13 @@ const useStyles = makeStyles((theme: Theme) => ({
 		'& > img': {
 			width: '100%'
 		}
+	},
+	actions: {
+		marginTop: theme.spacing(3),
+		display: 'flex',
+		'& > *:not(:last-child)': {
+			marginRight: theme.spacing(2)
+		}
 	}
 }));
 
@@ -32,9 +39,13 @@ const PostsPage: React.FC = () => {
 	const classes = useStyles();
 	const posts: PostsState = useSelector((state: RootState) => state.posts);
 
+	const fetchPosts = () => {
+		dispatch(getPosts());
+	};
+
 	useEffect(() => {
 		if (isEmpty(posts?.data)) {
-			dispatch(getPosts());
+			fetchPosts();
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
@@ -68,12 +79,25 @@ const PostsPage: React.FC = () => {
 			]}
 			loading={posts?.loading}
 			sideContentNode={
-				<PostList
-					posts={posts?.data ?? []}
-					onClick={handlePostClick}
-					onDismiss={handlePostDismiss}
-					onDismissAll={handlePostDismissAll}
-				/>
+				isEmpty(posts?.data) ? (
+					<Box display="flex" justifyContent="center" mt={2}>
+						<Button
+							variant="contained"
+							color="primary"
+							disabled={posts?.loading}
+							onClick={fetchPosts}
+						>
+							Fetch posts
+						</Button>
+					</Box>
+				) : (
+					<PostList
+						posts={posts?.data ?? []}
+						onClick={handlePostClick}
+						onDismiss={handlePostDismiss}
+						onDismissAll={handlePostDismissAll}
+					/>
+				)
 			}
 		>
 			{!posts?.loading && isEmpty(posts?.active) && (
@@ -81,13 +105,13 @@ const PostsPage: React.FC = () => {
 			)}
 			{!isEmpty(posts?.active) && (
 				<>
-					<Typography variant="h4" component="h2">
+					<Typography variant="h4" component="h2" paragraph>
 						{posts?.active?.title}
 					</Typography>
 					<Typography variant="body2" component="p">
 						{posts?.active?.author}
 					</Typography>
-					<Typography variant="body2" component="p">
+					<Typography variant="body2" component="p" paragraph>
 						{formatDistanceToNow(fromUnixTime(posts?.active?.time ?? 0))} -{' '}
 						{`${posts?.active?.comments} comments`}
 					</Typography>
@@ -102,29 +126,33 @@ const PostsPage: React.FC = () => {
 							<img src={posts?.active?.image ?? undefined} alt="Post" />
 						</ButtonBase>
 					)}
-					{isNil(find(posts?.gallery, ({ id }) => id === posts?.active?.id)) ? (
+					<div className={classes.actions}>
+						{isNil(
+							find(posts?.gallery, ({ id }) => id === posts?.active?.id)
+						) ? (
+							<Button
+								variant="contained"
+								onClick={() => handleSaveToGallery(posts?.active?.id as string)}
+							>
+								Save to gallery
+							</Button>
+						) : (
+							<Button
+								variant="contained"
+								onClick={() =>
+									handleRemoveFromGallery(posts?.active?.id as string)
+								}
+							>
+								Remove from gallery
+							</Button>
+						)}
 						<Button
 							variant="contained"
-							onClick={() => handleSaveToGallery(posts?.active?.id as string)}
+							onClick={() => handlePostDismiss(posts?.active?.id as string)}
 						>
-							Save to gallery
+							Dismiss post
 						</Button>
-					) : (
-						<Button
-							variant="contained"
-							onClick={() =>
-								handleRemoveFromGallery(posts?.active?.id as string)
-							}
-						>
-							Remove from gallery
-						</Button>
-					)}
-					<Button
-						variant="contained"
-						onClick={() => handlePostDismiss(posts?.active?.id as string)}
-					>
-						Dismiss post
-					</Button>
+					</div>
 				</>
 			)}
 		</DefaultLayout>
