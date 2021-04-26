@@ -21,13 +21,34 @@ export const getPosts = (): ThunkAction<
 
 		dispatch({
 			type: types.GET_POSTS_SUCCESS,
-			payload: posts
+			payload: { posts }
 		});
 	} catch (error) {
 		console.error(error);
 		dispatch({
 			type: types.GET_POSTS_FAIL,
-			payload: error
+			payload: { error }
 		});
 	}
+};
+
+export const viewPost = (
+	id: string
+): ThunkAction<void, RootState, unknown, AnyAction> => dispatch => {
+	dispatch({ type: types.VIEW_POST, payload: { id } });
+};
+
+export const dismissPost = (
+	id: string
+): ThunkAction<void, RootState, unknown, AnyAction> => dispatch => {
+	dispatch({ type: types.DISMISS_POST, payload: { id } });
+};
+
+export const dismissPostList = (): ThunkAction<
+	void,
+	RootState,
+	unknown,
+	AnyAction
+> => dispatch => {
+	dispatch({ type: types.DISMISS_POST_LIST });
 };

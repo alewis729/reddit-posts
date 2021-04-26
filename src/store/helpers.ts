@@ -1,17 +1,6 @@
-type TransformPosts<D> = ({
-	data
-}: {
-	data: D;
-}) => {
-	id: string;
-	title: string;
-	thumbnail: string | null;
-	image: string | null;
-	author: string;
-	time: string;
-	comments: number;
-	viewed: boolean;
-};
+import { Post } from 'src/lib/types';
+
+type TransformPosts<D> = ({ data }: { data: D }) => Post;
 
 export const transformPost: TransformPosts<any> = ({ data }) => ({
 	id: data.id,

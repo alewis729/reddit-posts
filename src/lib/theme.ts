@@ -28,6 +28,9 @@ const options: ThemeOptions = {
 		button: {
 			textTransform: 'none'
 		}
+	},
+	shape: {
+		borderRadius: 8
 	}
 };
 

@@ -8,14 +8,50 @@ export const useStyles = makeStyles((theme: Theme) => ({
 		margin: 0,
 		maxWidth: 'none',
 		display: 'flex',
-		flexDirection: 'column',
+		flexDirection: 'column'
+	},
+	loader: {
+		height: theme.spacing(1)
+	},
+	paper: {
+		marginTop: theme.spacing(8),
+		height: '85vh',
+		display: 'flex',
+		flexDirection: 'column'
+	},
+	header: {
+		borderBottom: `1px solid ${theme.palette.grey[600]}`,
+		display: 'flex',
+		alignItems: 'center',
 		justifyContent: 'space-between',
-		[theme.breakpoints.up('md')]: {
-			paddingTop: theme.spacing(8)
+		padding: theme.spacing(1.5, 4)
+	},
+	title: {
+		flexGrow: 1
+	},
+	links: {
+		'& > *:not(:last-child)': {
+			marginRight: theme.spacing(2)
 		}
 	},
-	header: {},
-	content: {},
-	sideContent: {},
-	mainContent: {}
+	externalLinks: {
+		marginLeft: theme.spacing(2),
+		'& .MuiLink-root': {
+			paddingBottom: theme.spacing(1)
+		}
+	},
+	content: {
+		display: 'flex',
+		flexGrow: 1
+	},
+	sideContent: {
+		flexShrink: 0,
+		width: '35%',
+		maxWidth: 420,
+		borderRight: `1px solid ${theme.palette.grey[600]}`
+	},
+	mainContent: {
+		flexGrow: 1,
+		padding: theme.spacing(4)
+	}
 }));
