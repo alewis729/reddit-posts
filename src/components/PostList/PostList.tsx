@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { isNil, map, slice } from 'lodash';
+import { ceil, isNil, map, slice } from 'lodash';
 import { formatDistanceToNow, fromUnixTime } from 'date-fns';
 import clsx from 'clsx';
 import {
@@ -82,7 +82,13 @@ const PostList: React.FC<Props> = props => {
 								</Box>
 								<div className={classes.postRow}>
 									<Typography variant="body2">{`${obj.comments} comments`}</Typography>
-									<Button onClick={() => onDismiss(obj.id)} variant="outlined">
+									<Button
+										onClick={e => {
+											e.stopPropagation();
+											onDismiss(obj.id);
+										}}
+										variant="outlined"
+									>
 										Dismiss
 									</Button>
 								</div>
@@ -93,7 +99,7 @@ const PostList: React.FC<Props> = props => {
 			</div>
 			<div className={classes.actions}>
 				<Pagination
-					count={4}
+					count={ceil(propPosts.length / postsPerPage)}
 					size="small"
 					page={page}
 					onChange={(_, newPage) => setPage(newPage)}

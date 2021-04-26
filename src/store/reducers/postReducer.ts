@@ -7,7 +7,7 @@ import { PostsState } from 'src/lib/types';
 const initialState: PostsState = {
 	loading: false,
 	error: false,
-	data: null,
+	data: [],
 	active: null,
 	gallery: []
 };
@@ -37,7 +37,7 @@ const reducer = (state: PostsState = initialState, action: AnyAction) => {
 				...state,
 				loading: false,
 				error: action.payload.error,
-				data: null
+				data: []
 			};
 		}
 		case types.VIEW_POST: {
@@ -59,7 +59,7 @@ const reducer = (state: PostsState = initialState, action: AnyAction) => {
 		case types.DISMISS_POST_LIST: {
 			return {
 				...state,
-				data: null,
+				data: [],
 				active: null,
 				gallery: []
 			};

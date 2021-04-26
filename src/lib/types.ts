@@ -12,7 +12,7 @@ export interface Post {
 export interface PostsState {
 	loading: boolean;
 	error: false | unknown;
-	data: null | Post[];
+	data: Post[];
 	active: null | Post;
 	gallery: Post[];
 }
