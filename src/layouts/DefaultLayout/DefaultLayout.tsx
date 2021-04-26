@@ -43,7 +43,7 @@ const DefaultLayout: React.FC<Props> = props => {
 							{!isEmpty(pages) && (
 								<div className={classes.links}>
 									{map(pages, ({ route, name }) => (
-										<Link key={route} to={route}>
+										<Link key={route} to={route} className={classes.link}>
 											{name}
 										</Link>
 									))}

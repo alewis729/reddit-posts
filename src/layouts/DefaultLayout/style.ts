@@ -34,6 +34,9 @@ export const useStyles = makeStyles((theme: Theme) => ({
 			marginRight: theme.spacing(2)
 		}
 	},
+	link: {
+		color: theme.palette.primary.light
+	},
 	externalLinks: {
 		marginLeft: theme.spacing(2)
 	},

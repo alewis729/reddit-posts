@@ -40,10 +40,6 @@ const PostList: React.FC<Props> = props => {
 		[page, propPosts]
 	);
 
-	React.useEffect(() => {
-		console.log({ posts });
-	}, [posts]);
-
 	return (
 		<div className={classes.root}>
 			<div className={classes.posts}>
