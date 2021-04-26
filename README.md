@@ -1,2 +1,1 @@
 # Reddit Top Entries
- 

@@ -1,5 +1,5 @@
 import { AnyAction } from 'redux';
-import { filter, find } from 'lodash';
+import { filter, find, isNil, map } from 'lodash';
 
 import * as types from '../actionTypes';
 import { PostsState } from 'src/lib/types';
@@ -8,7 +8,8 @@ const initialState: PostsState = {
 	loading: false,
 	error: false,
 	data: null,
-	active: null
+	active: null,
+	gallery: []
 };
 
 const reducer = (state: PostsState = initialState, action: AnyAction) => {
@@ -39,6 +40,7 @@ const reducer = (state: PostsState = initialState, action: AnyAction) => {
 		case types.VIEW_POST: {
 			return {
 				...state,
+				data: map(state.data, obj => obj.id === action.payload.id ? { ...obj, viewed: true } : obj),
 				active: find(state.data, ({ id }) => id === action.payload.id)
 			};
 		}
@@ -52,7 +54,28 @@ const reducer = (state: PostsState = initialState, action: AnyAction) => {
 		case types.DISMISS_POST_LIST: {
 			return {
 				...state,
-				data: null
+				data: null,
+				active: null,
+				gallery: []
+			};
+		}
+		case types.SAVE_TO_GALLERY: {
+			return {
+				...state,
+				gallery: isNil(
+					find(state.gallery, ({ id }) => id === action.payload.id)
+				)
+					? [
+						...state.gallery,
+						find(state.data, ({ id }) => id === action.payload.id)
+					]
+					: state.gallery
+			};
+		}
+		case types.REMOVE_FROM_GALLERY: {
+			return {
+				...state,
+				gallery: filter(state.gallery, ({ id }) => id !== action.payload.id)
 			};
 		}
 		default: {

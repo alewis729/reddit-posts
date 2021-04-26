@@ -65,7 +65,9 @@ const DefaultLayout: React.FC<Props> = props => {
 							{!isNil(sideContentNode) && (
 								<div className={classes.sideContent}>{sideContentNode}</div>
 							)}
-							<div className={classes.mainContent}>{children}</div>
+							<div className={classes.mainContent}>
+								<div className={classes.children}>{children}</div>
+							</div>
 						</div>
 					</Paper>
 				</Container>

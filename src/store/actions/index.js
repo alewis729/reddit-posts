@@ -2,5 +2,7 @@ export {
 	getPosts,
 	viewPost,
 	dismissPost,
-	dismissPostList
+	dismissPostList,
+	saveToGallery,
+	removeFromGallery
 } from './postActions';

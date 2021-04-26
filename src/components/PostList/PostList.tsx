@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
-import { map, slice } from 'lodash';
+import { isNil, map, slice } from 'lodash';
+import { formatDistanceToNow, fromUnixTime } from 'date-fns';
+import clsx from 'clsx';
 import {
+	Box,
 	Button,
 	Typography,
 	Card,
 	CardActionArea,
-	CardMedia,
 	CardContent
 } from '@material-ui/core';
+import { PanoramaRounded as IconThumbnail } from '@material-ui/icons';
 import { Pagination } from '@material-ui/lab';
 
 import { useStyles } from './style';
@@ -26,7 +29,7 @@ const PostList: React.FC<Props> = props => {
 		posts: propPosts,
 		postsPerPage = 15,
 		onClick,
-		// onDismiss,
+		onDismiss,
 		onDismissAll
 	} = props;
 	const classes = useStyles();
@@ -36,6 +39,10 @@ const PostList: React.FC<Props> = props => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 		[page, propPosts]
 	);
+
+	React.useEffect(() => {
+		console.log({ posts });
+	}, [posts]);
 
 	return (
 		<div className={classes.root}>
@@ -47,15 +54,42 @@ const PostList: React.FC<Props> = props => {
 						onClick={() => onClick(obj.id)}
 					>
 						<CardActionArea>
-							<CardMedia
-								className={classes.media}
-								image="/static/images/cards/contemplative-reptile.jpg"
-								title="Contemplative Reptile"
-							/>
 							<CardContent>
-								{obj.viewed && <div className={classes.postViewed} />}
-								<Typography variant="subtitle2">{obj.author}</Typography>
-								<Typography variant="body2">{`${obj.comments} comments`}</Typography>
+								<div className={classes.postRow}>
+									<div
+										className={clsx(classes.status, {
+											[classes.statusViewed]: obj.viewed
+										})}
+									/>
+									<Typography
+										variant="body2"
+										component="p"
+										className={classes.author}
+									>
+										{obj.author}
+									</Typography>
+									<Typography variant="body2" component="p">
+										{formatDistanceToNow(fromUnixTime(obj?.time ?? 0))}
+									</Typography>
+								</div>
+								<Box display="flex" my={1}>
+									{isNil(obj.thumbnail) ? (
+										<div className={classes.defaultThumbnail}>
+											<IconThumbnail />
+										</div>
+									) : (
+										<div className={classes.imageContainer}>
+											<img src={obj.thumbnail} alt="thumbnail" />
+										</div>
+									)}
+									<Typography variant="body1">{obj.title}</Typography>
+								</Box>
+								<div className={classes.postRow}>
+									<Typography variant="body2">{`${obj.comments} comments`}</Typography>
+									<Button onClick={() => onDismiss(obj.id)} variant="outlined">
+										Dismiss
+									</Button>
+								</div>
 							</CardContent>
 						</CardActionArea>
 					</Card>

@@ -52,6 +52,16 @@ export const useStyles = makeStyles((theme: Theme) => ({
 	},
 	mainContent: {
 		flexGrow: 1,
-		padding: theme.spacing(4)
+		width: 1, // important to not overflow flex container
+		overflowY: "auto",
+		padding: theme.spacing(4),
+	},
+	children: {
+		height: 1,
+		"&:after": {
+			content: "''",
+			display: "block",
+			height: theme.spacing(4)
+		}
 	}
 }));

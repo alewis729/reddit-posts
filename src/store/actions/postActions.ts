@@ -52,3 +52,15 @@ export const dismissPostList = (): ThunkAction<
 > => dispatch => {
 	dispatch({ type: types.DISMISS_POST_LIST });
 };
+
+export const saveToGallery = (
+	id: string
+): ThunkAction<void, RootState, unknown, AnyAction> => dispatch => {
+	dispatch({ type: types.SAVE_TO_GALLERY, payload: { id } });
+};
+
+export const removeFromGallery = (
+	id: string
+): ThunkAction<void, RootState, unknown, AnyAction> => dispatch => {
+	dispatch({ type: types.REMOVE_FROM_GALLERY, payload: { id } });
+};

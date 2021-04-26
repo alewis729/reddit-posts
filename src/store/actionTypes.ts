@@ -5,6 +5,5 @@ export const GET_POSTS_FAIL = 'GET_POSTS_FAIL';
 export const VIEW_POST = 'VIEW_POST';
 export const DISMISS_POST = 'DISMISS_POST';
 export const DISMISS_POST_LIST = 'DISMISS_POST_LIST';
-
-// gallery
 export const SAVE_TO_GALLERY = 'SAVE_TO_GALLERY';
+export const REMOVE_FROM_GALLERY = 'REMOVE_FROM_GALLERY';

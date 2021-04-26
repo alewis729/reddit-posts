@@ -1,11 +1,13 @@
 {
-	"plugins": ["react", "react-hooks"],
+	"plugins": ["@typescript-eslint", "prettier"],
 	"extends": [
 		"eslint:recommended",
 		"react-app",
 		"react-app/jest",
 		"plugin:react/recommended",
-		"plugin:prettier/recommended"
+		"plugin:@typescript-eslint/eslint-recommended",
+		"plugin:@typescript-eslint/recommended",
+		"prettier"
 	],
 	"parser": "@typescript-eslint/parser",
 	"parserOptions": {
