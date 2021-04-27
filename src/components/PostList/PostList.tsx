@@ -1,19 +1,11 @@
 import React, { useState } from 'react';
-import { ceil, isNil, map, slice } from 'lodash';
-import { formatDistanceToNow, fromUnixTime } from 'date-fns';
-import clsx from 'clsx';
-import {
-	Box,
-	Button,
-	Typography,
-	Card,
-	CardActionArea,
-	CardContent
-} from '@material-ui/core';
-import { PanoramaRounded as IconThumbnail } from '@material-ui/icons';
+import { ceil, map, slice } from 'lodash';
+import { Button } from '@material-ui/core';
 import { Pagination } from '@material-ui/lab';
+import { AnimatePresence } from 'framer-motion';
 
 import { useStyles } from './style';
+import { PostListItem } from 'src/components';
 import { Post } from 'src/lib/types';
 
 interface Props {
@@ -43,59 +35,26 @@ const PostList: React.FC<Props> = props => {
 	return (
 		<div className={classes.root}>
 			<div className={classes.posts}>
-				{map(posts, obj => (
-					<Card
-						key={obj.id}
-						className={classes.post}
-						onClick={() => onClick(obj.id)}
-					>
-						<CardActionArea>
-							<CardContent>
-								<div className={classes.postRow}>
-									<div
-										className={clsx(classes.status, {
-											[classes.statusViewed]: obj.viewed
-										})}
-									/>
-									<Typography
-										variant="body2"
-										component="p"
-										className={classes.author}
-									>
-										{obj.author}
-									</Typography>
-									<Typography variant="body2" component="p">
-										{formatDistanceToNow(fromUnixTime(obj?.time ?? 0))}
-									</Typography>
-								</div>
-								<Box display="flex" my={1}>
-									{isNil(obj.thumbnail) ? (
-										<div className={classes.defaultThumbnail}>
-											<IconThumbnail />
-										</div>
-									) : (
-										<div className={classes.imageContainer}>
-											<img src={obj.thumbnail} alt="thumbnail" />
-										</div>
-									)}
-									<Typography variant="body1">{obj.title}</Typography>
-								</Box>
-								<div className={classes.postRow}>
-									<Typography variant="body2">{`${obj.comments} comments`}</Typography>
-									<Button
-										onClick={e => {
-											e.stopPropagation();
-											onDismiss(obj.id);
-										}}
-										variant="outlined"
-									>
-										Dismiss
-									</Button>
-								</div>
-							</CardContent>
-						</CardActionArea>
-					</Card>
-				))}
+				<AnimatePresence>
+					{map(posts, obj => (
+						<PostListItem
+							key={obj.id}
+							post={obj}
+							onClick={onClick}
+							renderDismissBtn={id => (
+								<Button
+									onClick={e => {
+										e.stopPropagation();
+										onDismiss(obj.id);
+									}}
+									variant="outlined"
+								>
+									Dismiss
+								</Button>
+							)}
+						/>
+					))}
+				</AnimatePresence>
 			</div>
 			<div className={classes.actions}>
 				<Pagination
