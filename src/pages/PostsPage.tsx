@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { find, isEmpty, isNil } from 'lodash';
 import { formatDistanceToNow, fromUnixTime } from 'date-fns';
@@ -38,6 +38,11 @@ const PostsPage: React.FC = () => {
 	const dispatch = useDispatch();
 	const classes = useStyles();
 	const posts: PostsState = useSelector((state: RootState) => state.posts);
+	const activePost = useMemo(
+		() => find(posts?.data, ({ id }) => id === posts?.activeId) ?? null,
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+		[posts?.activeId]
+	);
 
 	const fetchPosts = () => {
 		dispatch(getPosts());
@@ -100,39 +105,37 @@ const PostsPage: React.FC = () => {
 				)
 			}
 		>
-			{!posts?.loading && isEmpty(posts?.active) && (
+			{!posts?.loading && isEmpty(activePost) && (
 				<Typography>Nothing to see...</Typography>
 			)}
-			{!isEmpty(posts?.active) && (
+			{!isEmpty(activePost) && (
 				<>
 					<Typography variant="h4" component="h2" paragraph>
-						{posts?.active?.title}
+						{activePost?.title}
 					</Typography>
 					<Typography variant="body2" component="p">
-						{posts?.active?.author}
+						{activePost?.author}
 					</Typography>
 					<Typography variant="body2" component="p" paragraph>
-						{formatDistanceToNow(fromUnixTime(posts?.active?.time ?? 0))} -{' '}
-						{`${posts?.active?.comments} comments`}
+						{formatDistanceToNow(fromUnixTime(activePost?.time ?? 0))} -{' '}
+						{`${activePost?.comments} comments`}
 					</Typography>
-					{!isNil(posts?.active?.image) && (
+					{!isNil(activePost?.image) && (
 						<ButtonBase
 							focusRipple
 							className={classes.imageContainer}
 							onClick={() => {
-								window.open(posts?.active?.image ?? undefined, '_blank');
+								window.open(activePost?.image ?? undefined, '_blank');
 							}}
 						>
-							<img src={posts?.active?.image ?? undefined} alt="Post" />
+							<img src={activePost?.image ?? undefined} alt="Post" />
 						</ButtonBase>
 					)}
 					<div className={classes.actions}>
-						{isNil(
-							find(posts?.gallery, ({ id }) => id === posts?.active?.id)
-						) ? (
+						{isNil(find(posts?.gallery, ({ id }) => id === activePost?.id)) ? (
 							<Button
 								variant="contained"
-								onClick={() => handleSaveToGallery(posts?.active?.id as string)}
+								onClick={() => handleSaveToGallery(activePost?.id as string)}
 							>
 								Save to gallery
 							</Button>
@@ -140,7 +143,7 @@ const PostsPage: React.FC = () => {
 							<Button
 								variant="contained"
 								onClick={() =>
-									handleRemoveFromGallery(posts?.active?.id as string)
+									handleRemoveFromGallery(activePost?.id as string)
 								}
 							>
 								Remove from gallery
@@ -148,7 +151,7 @@ const PostsPage: React.FC = () => {
 						)}
 						<Button
 							variant="contained"
-							onClick={() => handlePostDismiss(posts?.active?.id as string)}
+							onClick={() => handlePostDismiss(activePost?.id as string)}
 						>
 							Dismiss post
 						</Button>

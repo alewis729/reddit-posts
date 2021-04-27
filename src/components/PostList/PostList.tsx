@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { ceil, map, slice } from 'lodash';
 import { Button } from '@material-ui/core';
 import { Pagination } from '@material-ui/lab';
@@ -26,7 +26,7 @@ const PostList: React.FC<Props> = props => {
 	} = props;
 	const classes = useStyles();
 	const [page, setPage] = useState(1);
-	const posts = React.useMemo(
+	const posts = useMemo(
 		() => slice(propPosts, (page - 1) * postsPerPage, page * postsPerPage),
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 		[page, propPosts]

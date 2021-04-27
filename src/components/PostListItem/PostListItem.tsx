@@ -48,7 +48,7 @@ const PostList: React.FC<Props> = props => {
 			}}
 		>
 			<Card className={classes.post} onClick={() => onClick(post.id)}>
-				<CardActionArea>
+				<CardActionArea component="div">
 					<CardContent>
 						<div className={classes.postRow}>
 							<div

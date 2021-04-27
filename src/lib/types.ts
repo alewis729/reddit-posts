@@ -13,6 +13,6 @@ export interface PostsState {
 	loading: boolean;
 	error: false | unknown;
 	data: Post[];
-	active: null | Post;
+	activeId: string | null;
 	gallery: Post[];
 }

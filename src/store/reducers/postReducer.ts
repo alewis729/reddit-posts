@@ -8,7 +8,7 @@ const initialState: PostsState = {
 	loading: false,
 	error: false,
 	data: [],
-	active: null,
+	activeId: null,
 	gallery: []
 };
 
@@ -29,7 +29,7 @@ const reducer = (state: PostsState = initialState, action: AnyAction) => {
 					{ ...action.payload.posts?.[0], viewed: true },
 					...slice(action.payload.posts, 1)
 				],
-				active: action.payload.posts?.[0] ?? null
+				activeId: action.payload.posts?.[0]?.id ?? null
 			};
 		}
 		case types.GET_POSTS_FAIL: {
@@ -46,21 +46,22 @@ const reducer = (state: PostsState = initialState, action: AnyAction) => {
 				data: map(state.data, obj =>
 					obj.id === action.payload.id ? { ...obj, viewed: true } : obj
 				),
-				active: find(state.data, ({ id }) => id === action.payload.id)
+				activeId:
+					find(state.data, ({ id }) => id === action.payload.id)?.id ?? null
 			};
 		}
 		case types.DISMISS_POST: {
 			return {
 				...state,
 				data: filter(state.data, ({ id }) => id !== action.payload.id),
-				active: state.active?.id === action.payload.id ? null : state.active
+				activeId: state.activeId === action.payload.id ? null : state.activeId
 			};
 		}
 		case types.DISMISS_POST_LIST: {
 			return {
 				...state,
 				data: [],
-				active: null,
+				activeId: null,
 				gallery: []
 			};
 		}

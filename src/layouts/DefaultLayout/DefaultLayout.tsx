@@ -55,11 +55,11 @@ const DefaultLayout: React.FC<Props> = props => {
 	}, [isMdUp]);
 
 	useEffect(() => {
-		if (openNavigation && !isEmpty(posts?.active)) {
+		if (openNavigation && !isEmpty(posts?.activeId)) {
 			handleCloseNavigation();
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [posts?.active]);
+	}, [posts?.activeId]);
 
 	const handleToggleNavigation = () => {
 		if (openNavigation) hideNavigation();
