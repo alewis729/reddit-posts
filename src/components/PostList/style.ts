@@ -9,6 +9,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
 	posts: {
 		flexGrow: 1,
 		overflowY: 'auto',
+		height: 'calc(100vh - 70px - 72px)',
 		[theme.breakpoints.up('md')]: {
 			height: 1 // important to not overflow
 		}

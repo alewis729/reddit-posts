@@ -11,7 +11,7 @@ try {
 		? JSON.parse(sessionStorage.getItem('state') as string)
 		: {};
 } catch (error) {
-	console.log('getError', error);
+	console.error(error);
 }
 
 const persist = (store: any) => (next: any) => (action: any) => {

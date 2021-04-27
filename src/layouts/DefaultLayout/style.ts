@@ -77,8 +77,5 @@ export const useStyles = makeStyles((theme: Theme) => ({
 	},
 	mobileContent: {
 		padding: theme.spacing(3)
-	},
-	sideContentMobile: {
-		minWidth: 300
 	}
 }));

@@ -100,7 +100,7 @@ const DefaultLayout: React.FC<Props> = props => {
 	const [showNavigation, hideNavigation] = useModal(
 		({ in: open }) => (
 			<Navigation open={open} onClose={handleCloseNavigation}>
-				<div className={classes.sideContentMobile}>{sideContentNode}</div>
+				<div>{sideContentNode}</div>
 			</Navigation>
 		),
 		[sideContentNode]
