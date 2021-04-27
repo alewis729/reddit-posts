@@ -1,5 +1,5 @@
-import React, { useState, useMemo } from 'react';
-import { ceil, map, slice } from 'lodash';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
+import { ceil, isNil, map, slice } from 'lodash';
 import { Button } from '@material-ui/core';
 import { Pagination } from '@material-ui/lab';
 import { AnimatePresence } from 'framer-motion';
@@ -26,15 +26,23 @@ const PostList: React.FC<Props> = props => {
 	} = props;
 	const classes = useStyles();
 	const [page, setPage] = useState(1);
+	const listRef = useRef<HTMLDivElement>(null);
 	const posts = useMemo(
 		() => slice(propPosts, (page - 1) * postsPerPage, page * postsPerPage),
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 		[page, propPosts]
 	);
 
+	useEffect(() => {
+		if (!isNil(listRef.current)) {
+			listRef?.current?.scrollTo(0, 0);
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [page]);
+
 	return (
 		<div className={classes.root}>
-			<div className={classes.posts}>
+			<div className={classes.posts} ref={listRef}>
 				<AnimatePresence>
 					{map(posts, obj => (
 						<PostListItem
