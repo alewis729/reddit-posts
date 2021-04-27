@@ -5,7 +5,7 @@ import { formatDistanceToNow, fromUnixTime } from 'date-fns';
 import { Box, Typography, ButtonBase, Button } from '@material-ui/core';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 
-import { RootState } from 'src/store/store';
+import { RootState } from 'src/store/storeConfig';
 import {
 	getPosts,
 	viewPost,

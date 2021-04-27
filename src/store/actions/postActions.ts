@@ -3,7 +3,7 @@ import { AnyAction } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 import { map } from 'lodash';
 
-import { RootState } from '../store';
+import { RootState } from '../storeConfig';
 import * as types from '../actionTypes';
 import * as endpoints from '../endpoints';
 import { transformPost } from '../helpers';

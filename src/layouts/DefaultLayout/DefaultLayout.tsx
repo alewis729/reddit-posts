@@ -15,7 +15,7 @@ import { MenuRounded as IconMenu } from '@material-ui/icons';
 import { useModal } from 'react-modal-hook';
 import { useSelector } from 'react-redux';
 
-import { RootState } from 'src/store/store';
+import { RootState } from 'src/store/storeConfig';
 import { useStyles } from './style';
 import { externalLinks } from './defaults';
 import { Link, Navigation } from 'src/components';

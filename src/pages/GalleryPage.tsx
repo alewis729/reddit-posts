@@ -14,7 +14,7 @@ import {
 import { makeStyles, Theme } from '@material-ui/core/styles';
 
 import { viewPost, dismissPost, removeFromGallery } from 'src/store/actions';
-import { RootState } from 'src/store/store';
+import { RootState } from 'src/store/storeConfig';
 import { DefaultLayout } from 'src/layouts';
 import { PostsState } from 'src/lib/types';
 
