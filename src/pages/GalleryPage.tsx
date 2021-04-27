@@ -12,61 +12,61 @@ import { PostCard } from 'src/components';
 import { PostsState } from 'src/lib/types';
 
 const useStyles = makeStyles((theme: Theme) => ({
-	root: {
-		display: 'flex',
-		flexWrap: 'wrap',
-		'& > *': {
-			margin: theme.spacing(2)
-		}
-	}
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    '& > *': {
+      margin: theme.spacing(2)
+    }
+  }
 }));
 
 const GalleryPage: React.FC = () => {
-	const dispatch = useDispatch();
-	const history = useHistory();
-	const classes = useStyles();
-	const posts: PostsState = useSelector((state: RootState) => state.posts);
-	const postList = useMemo(() => filter(posts?.data, post => post?.inGallery), [
-		posts?.data
-	]);
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const classes = useStyles();
+  const posts: PostsState = useSelector((state: RootState) => state.posts);
+  const postList = useMemo(() => filter(posts?.data, post => post?.inGallery), [
+    posts?.data
+  ]);
 
-	const handleViewPost = (id: string) => {
-		dispatch(viewPost(id));
-		history.push('/');
-	};
+  const handleViewPost = (id: string) => {
+    dispatch(viewPost(id));
+    history.push('/');
+  };
 
-	const handlePostDismiss = (id: string) => {
-		dispatch(dismissPost(id));
-	};
+  const handlePostDismiss = (id: string) => {
+    dispatch(dismissPost(id));
+  };
 
-	const handleRemoveFromGallery = (id: string) => {
-		dispatch(removeFromGallery(id));
-	};
+  const handleRemoveFromGallery = (id: string) => {
+    dispatch(removeFromGallery(id));
+  };
 
-	return (
-		<DefaultLayout
-			title="Gallery"
-			pages={[
-				{ route: '/', name: 'Posts' },
-				{ route: '/gallery', name: 'Gallery' }
-			]}
-			disableNavigation
-		>
-			<div className={classes.root}>
-				<AnimatePresence>
-					{map(postList, obj => (
-						<PostCard
-							key={obj.id}
-							post={obj}
-							onViewPost={handleViewPost}
-							onPostDismiss={handlePostDismiss}
-							onRemoveFromGallery={handleRemoveFromGallery}
-						/>
-					))}
-				</AnimatePresence>
-			</div>
-		</DefaultLayout>
-	);
+  return (
+    <DefaultLayout
+      title="Gallery"
+      pages={[
+        { route: '/', name: 'Posts' },
+        { route: '/gallery', name: 'Gallery' }
+      ]}
+      disableNavigation
+    >
+      <div className={classes.root}>
+        <AnimatePresence>
+          {map(postList, obj => (
+            <PostCard
+              key={obj.id}
+              post={obj}
+              onViewPost={handleViewPost}
+              onPostDismiss={handlePostDismiss}
+              onRemoveFromGallery={handleRemoveFromGallery}
+            />
+          ))}
+        </AnimatePresence>
+      </div>
+    </DefaultLayout>
+  );
 };
 
 export default GalleryPage;

@@ -4,11 +4,11 @@ import { Link as MuiLink } from '@material-ui/core';
 import { LinkProps } from '@material-ui/core/Link';
 
 interface Props extends LinkProps {
-	to: string;
+  to: string;
 }
 
 const Link: React.FC<Props> = props => (
-	<MuiLink component={RouterLink} {...props} />
+  <MuiLink component={RouterLink} {...props} />
 );
 
 export default Link;

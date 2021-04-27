@@ -11,18 +11,18 @@ import { theme } from 'src/lib/theme';
 import Routes from 'src/lib/Routes';
 
 const App: React.FC = () => {
-	return (
-		<BrowserRouter>
-			<Provider store={store}>
-				<ThemeProvider theme={theme}>
-					<CssBaseline />
-					<ModalProvider rootComponent={TransitionGroup}>
-						<Route component={Routes} />
-					</ModalProvider>
-				</ThemeProvider>
-			</Provider>
-		</BrowserRouter>
-	);
+  return (
+    <BrowserRouter>
+      <Provider store={store}>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <ModalProvider rootComponent={TransitionGroup}>
+            <Route component={Routes} />
+          </ModalProvider>
+        </ThemeProvider>
+      </Provider>
+    </BrowserRouter>
+  );
 };
 
 export default App;

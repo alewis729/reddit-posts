@@ -1,8 +1,8 @@
 export {
-	getPosts,
-	viewPost,
-	dismissPost,
-	dismissPostList,
-	saveToGallery,
-	removeFromGallery
+  getPosts,
+  viewPost,
+  dismissPost,
+  dismissPostList,
+  saveToGallery,
+  removeFromGallery
 } from './postActions';
