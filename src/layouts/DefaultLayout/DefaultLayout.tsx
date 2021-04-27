@@ -112,8 +112,8 @@ const DefaultLayout: React.FC<Props> = props => {
 				<div>
 					<div className={classes.mobileHeader}>
 						<Toolbar />
-						<AppBar className={classes.appBar} position="fixed" color="inherit">
-							<Container>
+						<AppBar position="fixed" color="inherit">
+							<Container className={classes.appBarContent}>
 								<IconButton
 									onClick={handleToggleNavigation}
 									disabled={disableNavigation}

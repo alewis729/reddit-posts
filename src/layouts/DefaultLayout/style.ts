@@ -67,13 +67,11 @@ export const useStyles = makeStyles((theme: Theme) => ({
 	mobileHeader: {
 		...theme.mixins.toolbar
 	},
-	appBar: {
-		padding: theme.spacing(1, 0),
-		'& > *': {
-			display: 'flex',
-			justifyContent: 'space-between',
-			alignItems: 'center'
-		}
+	appBarContent: {
+		padding: theme.spacing(1),
+		display: 'flex',
+		justifyContent: 'space-between',
+		alignItems: 'center'
 	},
 	mobileContent: {
 		padding: theme.spacing(3)
