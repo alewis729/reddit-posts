@@ -19,18 +19,18 @@ I didn't use branches since I worked alone and the codebase is small.
 ### Decisions
 
 - For the main tech, I thought of using NextJS or React with Webpack, but I felt that CRA was a safe bet to quickly set up the repo.
-- I used typescript for its flexibility, and it's advantages over just prop-types or flow. However, I know I have some points to improve here.
+- I used typescript for its flexibility, and it's advantages over just prop-types or flow. However, I know I have some things to improve here.
 - For styling I could have used styled components, scss or another styling solution, but I chose material-ui for it's ready to use components and quick and easy way to make a theme.
-- Animation requirements weren't that complex, and I could have probably completed them using style properties, but I chose to use framer-motion. With framer-motion animations didn't take much time, and they could easily be improved and maintained.
+- Animation requirements weren't that complex, and I could have probably completed them using style properties, but I chose to use framer-motion. With framer-motion animations didn't take much time, and they can easily be improved and maintained.
 - Usage of redux was a requirement. I thought of using redux-persist, but I preferred to manually persist data to sessionStorage.
-- For tests I just used jest. I only wrote state changing tests. Component unit tests could be written even though components inside `src/components` aren't necessarily  reusable.
+- For tests I just used jest. I only wrote state changing tests. Component unit tests could be written even though components under `src/components` aren't necessarily reusable.
 
 ### Additional thoughts
 
 - All the [requirements](https://github.com/deviget/Front-end#what-to-show) have been fulfilled.
 - Saving pictures in the gallery wasn't very clear, so I took the freedom to make a post gallery in order to make the app a bit more complete.
 - I was planning on making a light theme as well, but it wasn't a priority nor a requirement.
-- I wanted to implement a husky pre-commit hook to run tests, lint & format changed files before committing, but I couldn't understand why it wasn't working in the beginning, so I left it for the later. In the end I didn't do it, but it would definitely be more important if working in a collaborative environment.
+- I wanted to implement a husky pre-commit hook to run tests, lint & format changed files before committing, but I couldn't understand why it wasn't working in the beginning, so I left it for the later in order to not waste much time. In the end I didn't do it, but it would definitely be more important if there'd be more people working collaboratively.
 
 ## How to run locally
 
@@ -46,4 +46,10 @@ yarn install
 
 ```bash
 yarn start
+```
+
+4. Run tests
+
+```bash
+yarn test
 ```
