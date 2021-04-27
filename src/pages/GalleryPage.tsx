@@ -67,6 +67,7 @@ const GalleryPage: React.FC = () => {
 				{ route: '/', name: 'Posts' },
 				{ route: '/gallery', name: 'Gallery' }
 			]}
+			disableNavigation
 		>
 			<div className={classes.container}>
 				{map(posts?.gallery, obj => (

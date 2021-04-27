@@ -3,6 +3,8 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { CssBaseline } from '@material-ui/core';
+import { ModalProvider } from 'react-modal-hook';
+import { TransitionGroup } from 'react-transition-group';
 
 import store from './store';
 import { theme } from 'src/lib/theme';
@@ -14,7 +16,9 @@ const App: React.FC = () => {
 			<Provider store={store}>
 				<ThemeProvider theme={theme}>
 					<CssBaseline />
-					<Route component={Routes} />
+					<ModalProvider rootComponent={TransitionGroup}>
+						<Route component={Routes} />
+					</ModalProvider>
 				</ThemeProvider>
 			</Provider>
 		</BrowserRouter>

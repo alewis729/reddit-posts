@@ -9,7 +9,9 @@ export const useStyles = makeStyles((theme: Theme) => ({
 	posts: {
 		flexGrow: 1,
 		overflowY: 'auto',
-		height: 1 // important to not overflow
+		[theme.breakpoints.up('md')]: {
+			height: 1 // important to not overflow
+		}
 	},
 	post: {
 		borderRadius: 0,
