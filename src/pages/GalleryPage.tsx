@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { map } from 'lodash';
+import { filter, map } from 'lodash';
 import {
 	Card,
 	CardActionArea,
@@ -46,6 +46,9 @@ const GalleryPage: React.FC = () => {
 	const history = useHistory();
 	const classes = useStyles();
 	const posts: PostsState = useSelector((state: RootState) => state.posts);
+	const postList = useMemo(() => filter(posts?.data, post => post?.inGallery), [
+		posts?.data
+	]);
 
 	const handleViewPost = (id: string) => {
 		dispatch(viewPost(id));
@@ -70,7 +73,7 @@ const GalleryPage: React.FC = () => {
 			disableNavigation
 		>
 			<div className={classes.container}>
-				{map(posts?.gallery, obj => (
+				{map(postList, obj => (
 					<Card key={obj.id} className={classes.card}>
 						<CardActionArea
 							className={classes.actionArea}

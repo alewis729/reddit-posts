@@ -41,7 +41,7 @@ const PostsPage: React.FC = () => {
 	const activePost = useMemo(
 		() => find(posts?.data, ({ id }) => id === posts?.activeId) ?? null,
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-		[posts?.activeId]
+		[posts?.activeId, posts?.data]
 	);
 
 	const fetchPosts = () => {
@@ -132,7 +132,7 @@ const PostsPage: React.FC = () => {
 						</ButtonBase>
 					)}
 					<div className={classes.actions}>
-						{isNil(find(posts?.gallery, ({ id }) => id === activePost?.id)) ? (
+						{!activePost?.inGallery ? (
 							<Button
 								variant="contained"
 								onClick={() => handleSaveToGallery(activePost?.id as string)}

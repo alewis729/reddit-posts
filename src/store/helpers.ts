@@ -10,5 +10,6 @@ export const transformPost: TransformPosts<any> = ({ data }) => ({
 	author: data.author,
 	time: data.created_utc,
 	comments: data.num_comments,
-	viewed: false
+	viewed: false,
+	inGallery: false
 });

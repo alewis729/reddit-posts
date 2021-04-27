@@ -7,6 +7,7 @@ export interface Post {
 	time: number;
 	comments: number;
 	viewed: boolean;
+	inGallery: boolean;
 }
 
 export interface PostsState {
@@ -14,5 +15,4 @@ export interface PostsState {
 	error: false | unknown;
 	data: Post[];
 	activeId: string | null;
-	gallery: Post[];
 }
