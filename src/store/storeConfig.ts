@@ -7,8 +7,8 @@ import { postReducer } from './reducers';
 
 let initialState = {};
 try {
-	initialState = !isNil(sessionStorage.getItem('state'))
-		? JSON.parse(sessionStorage.getItem('state') as string)
+	initialState = !isNil(localStorage.getItem('state'))
+		? JSON.parse(localStorage.getItem('state') as string)
 		: {};
 } catch (error) {
 	console.error(error);
@@ -17,7 +17,7 @@ try {
 const persist = (store: any) => (next: any) => (action: any) => {
 	const result = next(action);
 	const stateToSave = store.getState();
-	sessionStorage.setItem('state', JSON.stringify({ ...stateToSave }));
+	localStorage.setItem('state', JSON.stringify({ ...stateToSave }));
 	return result;
 };
 

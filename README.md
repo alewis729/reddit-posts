@@ -22,7 +22,7 @@ I didn't use branches since I worked alone and the codebase is small.
 - I used typescript for its flexibility, and it's advantages over just prop-types or flow. However, I know I have some things to improve here.
 - For styling I could have used styled components, scss or another styling solution, but I chose material-ui for it's ready to use components and quick and easy way to make a theme.
 - Animation requirements weren't that complex, and I could have probably completed them using style properties, but I chose to use framer-motion. With framer-motion animations didn't take much time, and they can easily be improved and maintained.
-- Usage of redux was a requirement. I thought of using redux-persist, but I preferred to manually persist data to sessionStorage.
+- Usage of redux was a requirement. I thought of using redux-persist, but I preferred to manually persist data to localStorage.
 - For tests I just used jest. I only wrote state changing tests. Component unit tests could be written even though components under `src/components` aren't necessarily reusable.
 
 ### Additional thoughts
