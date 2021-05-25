@@ -2,24 +2,14 @@ import React, { useMemo } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { filter, map } from 'lodash';
-import { makeStyles, Theme } from '@material-ui/core/styles';
 import { AnimatePresence } from 'framer-motion';
 
+import { useStyles } from './style';
 import { viewPost, dismissPost, removeFromGallery } from 'src/store/actions';
 import { RootState } from 'src/store/storeConfig';
 import { DefaultLayout } from 'src/layouts';
 import { PostCard } from 'src/components';
 import { PostsState } from 'src/lib/types';
-
-const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '& > *': {
-      margin: theme.spacing(2)
-    }
-  }
-}));
 
 const GalleryPage: React.FC = () => {
   const dispatch = useDispatch();

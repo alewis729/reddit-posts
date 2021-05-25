@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { find, isEmpty, isNil } from 'lodash';
 import { formatDistanceToNow, fromUnixTime } from 'date-fns';
 import { Box, Typography, ButtonBase, Button } from '@material-ui/core';
-import { makeStyles, Theme } from '@material-ui/core/styles';
 
+import { useStyles } from './style';
 import { RootState } from 'src/store/storeConfig';
 import {
   getPosts,
@@ -18,29 +18,12 @@ import { DefaultLayout } from 'src/layouts';
 import { PostList } from 'src/components';
 import { PostsState } from 'src/lib/types';
 
-const useStyles = makeStyles((theme: Theme) => ({
-  imageContainer: {
-    maxWidth: '100%',
-    '& > img': {
-      width: '100%'
-    }
-  },
-  actions: {
-    marginTop: theme.spacing(3),
-    display: 'flex',
-    '& > *:not(:last-child)': {
-      marginRight: theme.spacing(2)
-    }
-  }
-}));
-
 const PostsPage: React.FC = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
   const posts: PostsState = useSelector((state: RootState) => state.posts);
   const activePost = useMemo(
     () => find(posts?.data, ({ id }) => id === posts?.activeId) ?? null,
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [posts?.activeId, posts?.data]
   );
 
